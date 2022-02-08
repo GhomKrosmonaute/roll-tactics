@@ -1,16 +1,28 @@
 import * as battle from "./battle"
 
 export abstract class Soldier {
-  private _exp = 0
-  private _level = 1
+  played = false
 
-  protected abstract _hp: number
-  protected abstract _strength: number
+  protected _exp = 0
+  protected _level = 1
+  protected _hp: number
+  protected _strength: number
 
-  constructor(public readonly battle: battle.Battle) {}
+  protected constructor(
+    public readonly battle: battle.Battle,
+    protected _baseHp: number,
+    protected _baseStrength: number
+  ) {
+    this._hp = _baseHp
+    this._strength = _baseStrength
+  }
 
   abstract attack(): void
   abstract draw(): void
+
+  get level() {
+    return this._level
+  }
 
   get isDead() {
     return this.hp <= 0
@@ -21,8 +33,13 @@ export abstract class Soldier {
   }
 
   set exp(exp) {
+    const currentLevel = this._level
     this._exp = exp
-    this._level = 1 + Math.floor(exp / (100 / this._level))
+    this._level = 1 + Math.floor(exp / (100 / currentLevel))
+    if (currentLevel !== this._level) {
+      this._hp = this._baseHp * this._level
+      this._strength = this._baseStrength * this._level
+    }
   }
 
   get hp() {
@@ -43,40 +60,43 @@ export abstract class Soldier {
 }
 
 export class CriticalSoldier extends Soldier {
-  _hp = 50
-  _strength = 50
+  constructor(public readonly battle: battle.Battle) {
+    super(battle, 50, 50)
+  }
 
   attack() {
     // shooting a huge laser (high critical luck)
   }
 
   draw() {
-    if(this.isDead) return;
+    if (this.isDead) return
   }
 }
 
 export class TankSoldier extends Soldier {
-  _hp = 100
-  _strength = 50
+  constructor(public readonly battle: battle.Battle) {
+    super(battle, 100, 50)
+  }
 
   attack() {
     // shooting one target
   }
 
   draw() {
-    if(this.isDead) return;
+    if (this.isDead) return
   }
 }
 
 export class FastSoldier extends Soldier {
-  _hp = 25
-  _strength = 25
+  constructor(public readonly battle: battle.Battle) {
+    super(battle, 25, 25)
+  }
 
   attack() {
     // shooting multiple projectile at multiple target
   }
 
   draw() {
-    if(this.isDead) return;
+    if (this.isDead) return
   }
 }
