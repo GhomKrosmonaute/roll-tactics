@@ -10,6 +10,11 @@ export abstract class Soldier {
   constructor(public readonly battle: battle.Battle) {}
 
   abstract attack(): void
+  abstract draw(): void
+
+  get isDead() {
+    return this.hp <= 0
+  }
 
   get exp() {
     return this._exp
@@ -44,6 +49,10 @@ export class CriticalSoldier extends Soldier {
   attack() {
     // shooting a huge laser (high critical luck)
   }
+
+  draw() {
+    if(this.isDead) return;
+  }
 }
 
 export class TankSoldier extends Soldier {
@@ -53,6 +62,10 @@ export class TankSoldier extends Soldier {
   attack() {
     // shooting one target
   }
+
+  draw() {
+    if(this.isDead) return;
+  }
 }
 
 export class FastSoldier extends Soldier {
@@ -61,5 +74,9 @@ export class FastSoldier extends Soldier {
 
   attack() {
     // shooting multiple projectile at multiple target
+  }
+
+  draw() {
+    if(this.isDead) return;
   }
 }
