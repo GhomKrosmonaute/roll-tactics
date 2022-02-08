@@ -25,5 +25,5 @@ export function keyPressed() {}
 export function keyReleased() {}
 export function mousePressed() {}
 export function mouseReleased() {
-  ;[...button.buttons].find((b) => b.checkClick())
+  ;[...button.buttons].find((b) => b.mouseHover)?.click()
 }

@@ -52,14 +52,10 @@ export class Button {
     )
   }
 
-  checkClick() {
-    if (this.mouseHover) {
-      this.listeners.forEach((onClick) => onClick())
-      this.onClick()
-      if (this.once) this.delete()
-      return true
-    }
-    return false
+  click() {
+    this.listeners.forEach((onClick) => onClick())
+    this.onClick()
+    if (this.once) this.delete()
   }
 
   draw() {
