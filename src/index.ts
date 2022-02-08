@@ -1,11 +1,10 @@
 /// @ts-check
 /// <reference path="../node_modules/@types/p5/global.d.ts" />
 
-import { Battle } from "./entities/battle"
+import * as button from "./ui/button"
+import * as battle from "./entities/battle"
 
 document.addEventListener("contextmenu", (event) => event.preventDefault())
-
-let game: Battle
 
 export function setup() {
   createCanvas(
@@ -13,14 +12,18 @@ export function setup() {
     Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
   )
 
-  game = new Battle()
+  battle.newBattle()
 }
 
 export function draw() {
   background(20)
 
-  game.draw()
+  button.buttons.forEach((button) => button.draw())
 }
 
 export function keyPressed() {}
 export function keyReleased() {}
+export function mousePressed() {}
+export function mouseReleased() {
+  ;[...button.buttons].find((b) => b.checkClick())
+}

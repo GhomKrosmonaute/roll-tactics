@@ -16,6 +16,7 @@ function bundle() {
           ".ts": "ts",
           ".json": "json",
         },
+        logLevel: "info",
       })
     )
     .pipe(gulp.dest("./dist/"))

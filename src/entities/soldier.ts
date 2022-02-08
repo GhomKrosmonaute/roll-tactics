@@ -18,7 +18,7 @@ export abstract class Soldier {
   }
 
   abstract attack(): void
-  abstract draw(): void
+  abstract draw(left: boolean): void
 
   get level() {
     return this._level
@@ -68,7 +68,7 @@ export class CriticalSoldier extends Soldier {
     // shooting a huge laser (high critical luck)
   }
 
-  draw() {
+  draw(left: boolean) {
     if (this.isDead) return
   }
 }
@@ -82,7 +82,7 @@ export class TankSoldier extends Soldier {
     // shooting one target
   }
 
-  draw() {
+  draw(left: boolean) {
     if (this.isDead) return
   }
 }
@@ -96,7 +96,7 @@ export class FastSoldier extends Soldier {
     // shooting multiple projectile at multiple target
   }
 
-  draw() {
+  draw(left: boolean) {
     if (this.isDead) return
   }
 }

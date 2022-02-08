@@ -5,9 +5,9 @@ export class BattleTeam {
   private _hp = 100
   private _shield = 0
 
-  public tankSoldier: soldier.TankSoldier
-  public fastSoldier: soldier.FastSoldier
-  public criticalSoldier: soldier.CriticalSoldier
+  public tankSoldier = new soldier.TankSoldier(this.battle)
+  public fastSoldier = new soldier.FastSoldier(this.battle)
+  public criticalSoldier = new soldier.CriticalSoldier(this.battle)
 
   constructor(public battle: battle.Battle) {}
 
@@ -103,6 +103,16 @@ export class BattleTeam {
   }
 
   draw(left: boolean) {
+    this.drawPlayer(left)
+    this.criticalSoldier.draw(left)
+    this.tankSoldier.draw(left)
+    this.fastSoldier.draw(left)
     // draw team to left or to right
+  }
+
+  drawPlayer(left: boolean) {
+    fill(255)
+    noStroke()
+    circle(left ? width * 0.2 : width * 0.8, height * 0.5, height * 0.25)
   }
 }
