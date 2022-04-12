@@ -98,5 +98,7 @@ export class FastSoldier extends Soldier {
 
   draw(left: boolean) {
     if (this.isDead) return
+
+
   }
 }

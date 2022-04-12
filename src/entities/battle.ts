@@ -100,7 +100,9 @@ export function newBattle() {
     width / 2,
     height / 2,
     () => context.currentBattle.startTurn(),
-    undefined,
+    () => {
+      utils.header("Roll Tactics")
+    },
     true,
     height * 0.06
   )
